@@ -20,9 +20,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          # Tady schválně nepoužíváme cache, protože nemáte Maven/Gradle
+
+      - name: List files (Debug)
+        run: dir /s  # Toto nám v logu ukáže, kde přesně jsou vaše .java soubory
 
       - name: Compile Java
-        run: |
-          mkdir bin
+        run: | 
           javac -d bin src/*.java
