@@ -2,14 +2,27 @@ name: Basic validation
 
 on:
   push:
-    push:
-      branches: [ "dev" ]
+    branches: [ "dev" ]
   pull_request:
-      branches: [ "dev" ]
+    branches: [ "dev" ]
 
 jobs:
-  call-basic-validation:
-    name: Basic validation
-    uses: actions/reusable-workflows/.github/workflows/basic-validation.yml@main
-    with:
-      node-version: '24.x'
+  build:
+    name: Build Java Project
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          # Tady schválně nepoužíváme cache, protože nemáte Maven/Gradle
+
+      - name: Compile Java
+        run: |
+          mkdir bin
+          javac -d bin src/*.java
