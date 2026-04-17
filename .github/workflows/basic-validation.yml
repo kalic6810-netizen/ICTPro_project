@@ -23,6 +23,7 @@ jobs:
 
       - name: List files (Debug)
         run: dir /s  # Toto nám v logu ukáže, kde přesně jsou vaše .java soubory
+        shell: cmd
 
       - name: Compile Java
         run: |
